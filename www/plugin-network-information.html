@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <!-- link rel="stylesheet" type="text/css" href="js/libs/jquery-mobile/1.4.5/themes/squareui/jquery.mobile.squareui.min.css" / -->
+        <link rel="stylesheet" type="text/css" href="js/libs/jquery-mobile/1.4.5/themes/flatui/jquery.mobile.flatui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		
+        <script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="js/libs/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/libs/jquery-mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		
+		<script type="text/javascript" src="js/index.js"></script>
+        
+		<title>Phonegap API Demo</title>
+    </head>
+    <body>
+		<div data-role="page" id="networkinfo">
+			<div data-role="header" data-position="fixed">
+			   <a href="index.html" data-direction="reverse" data-rel="back">Voltar</a>
+			   <h1>PG API Demo</h1>
+			</div>
+			
+			<div data-role="content">
+				<h3 class="ui-bar ui-bar-a ui-corner-all">Network API</h3>
+				
+				<div id="info" class="ui-body ui-body-a ui-corner-all">
+					<strong>Tipo de rede:</strong>
+					<p></p>
+				</div>
+				<br />
+				
+				<div class="ui-body ui-body-a ui-corner-all">
+					<strong>Status:</strong>
+					<div id="status">
+						<p class="offline">Desconectado</p>
+						<p class="unknown">Desconhecido</p>
+						<p class="online">Conectado</p>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div data-role="footer" data-position="fixed">
+				<h3>Phonegap</h3>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			function onDeviceReady() {
+				var networkState = navigator.connection.type;
+				
+				var states = {};
+				states[Connection.UNKNOWN]  = 'Unknown connection';
+				states[Connection.ETHERNET] = 'Ethernet connection';
+				states[Connection.WIFI]     = 'WiFi connection';
+				states[Connection.CELL_2G]  = 'Cell 2G connection';
+				states[Connection.CELL_3G]  = 'Cell 3G connection';
+				states[Connection.CELL_4G]  = 'Cell 4G connection';
+				states[Connection.CELL]     = 'Cell generic connection';
+				states[Connection.NONE]     = 'No network connection';
+				
+				$('#info p').html(states[networkState]);
+				
+				var status;
+				
+				if(networkState == Connection.NONE) {
+					status = 'offline';
+				} if(networkState == Connection.UNKNOWN) {
+					status = 'unknown';
+				} else {
+					status = 'online';
+				}
+				
+				document.getElementById('status').className = status;
+			}
+			
+			document.addEventListener("deviceready", onDeviceReady, true);
+			//https://www.npmjs.com/package/cordova-plugin-network-information
+		</script>
+
+	</body>
+</html>

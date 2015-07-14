@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <!-- link rel="stylesheet" type="text/css" href="js/libs/jquery-mobile/1.4.5/themes/squareui/jquery.mobile.squareui.min.css" / -->
+        <link rel="stylesheet" type="text/css" href="js/libs/jquery-mobile/1.4.5/themes/flatui/jquery.mobile.flatui.min.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		
+        <script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="js/libs/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/libs/jquery-mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		
+		<script type="text/javascript" src="js/index.js"></script>
+        
+		<title>Phonegap API Demo</title>
+    </head>
+	
+	<body>
+		<div data-role="page" id="battery">
+
+			<div data-role="header" data-position="fixed">
+			   <a href="index.html" data-direction="reverse" data-rel="back">Voltar</a>
+			   <h1>Phonegap App</h1>
+			</div>
+
+			<div data-role="content">
+				<h3 id="chamada" class="ui-bar ui-bar-a ui-corner-all">Battery API</h3>
+				
+				<div class="ui-body ui-body-a ui-corner-all">
+					<strong>Informações:</strong><div id="status"></div>
+				</div>
+				<br />
+				
+				<div class="ui-body ui-body-a ui-corner-all">
+					<strong>Nivel:</strong>
+					<div id="level">
+						<p class="critical">Crítico</p>
+						<p class="low">Baixo</p>
+						<p class="normal">Normal</p>
+					</div>
+				</div>
+			</div>
+
+			<div data-role="footer" data-position="fixed">
+				<h3>Phonegap</h3>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+			var level = document.getElementById('level');
+			
+			var drawStatus = function(battery){
+				var statusdiv = document.getElementById("status");
+				
+				var s = "<dl><dt>Status da bateria</dt>";
+					s += "<dd>Carga: " + battery.level + "%</dd>";
+				if(battery.isPlugged) {
+					s += "<dd class=\"blink\">Plugado: Sim</dd></dl>";
+				} else {
+					s += "<dd>Plugado: Não</dd></dl>";
+				}
+					
+				statusdiv.innerHTML = s;
+			};
+
+			var battCrit = function(info) {
+				level.className = 'critical';
+				drawStatus(info);
+			};
+
+			var battLow = function(info) {
+				level.className = 'low';
+				drawStatus(info);
+			};
+
+			var battStat = function(info) {
+				level.className = 'normal';
+				drawStatus(info);
+			};
+			
+			var onDeviceReady = function() {
+				window.addEventListener("batterycritical", battCrit, false);
+				window.addEventListener("batterylow", battLow, false);
+				window.addEventListener("batterystatus", battStat, false);
+			};
+			
+			document.addEventListener("deviceready", onDeviceReady, true);
+			//https://www.npmjs.com/package/cordova-plugin-battery-status
+		</script>
+	</body>
+</html>
