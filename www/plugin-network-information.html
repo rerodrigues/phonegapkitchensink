@@ -65,17 +65,15 @@
 				states[Connection.NONE]     = 'No network connection';
 				
 				$('#info p').html(states[networkState]);
-				
-				var status;
+
+				var status = 'online';
 				
 				if(networkState == Connection.NONE) {
 					status = 'offline';
-				} if(networkState == Connection.UNKNOWN) {
+				} else if(networkState == Connection.UNKNOWN) {
 					status = 'unknown';
-				} else {
-					status = 'online';
 				}
-				
+                
 				document.getElementById('status').className = status;
 			}
 			
