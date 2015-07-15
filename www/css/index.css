@@ -98,6 +98,7 @@ body {
 /* network Information */
 #status > p {
 	display: none;
+	
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
@@ -120,3 +121,38 @@ body {
 	color : #12b712;
 }
 /* /network Information */
+
+/* Device */
+#device-content::after {
+	background: url(../img/logos/cordova1.png) bottom right no-repeat;
+	background-size: 160px 160px;
+	height: 160px;
+	width: 160px;
+  
+	content: "";
+	opacity: 0.75;
+	bottom: 40px;
+	right: -5px;
+	position: absolute;
+	z-index: 0;
+	display: block;
+}
+
+#device-content.android::after {
+	background-image: url(../img/logos/android6.png);
+}
+
+#device-content.firefoxos::after {
+	background-image: url(../img/logos/firefoxos1.png);
+}
+
+#device-content.ios::after {
+	background-image: url(../img/logos/ios3.png);
+}
+
+#device-content.wp8::after,
+#device-content.windows8::after {
+	background-image: url(../img/logos/wp1.png);
+}
+
+/* /Device */
