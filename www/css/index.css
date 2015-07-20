@@ -123,6 +123,10 @@ body {
 /* /network Information */
 
 /* Device */
+#deviceInfo {
+    z-index: 1;
+}
+
 #device-content::after {
 	background: url(../img/logos/cordova1.png) bottom right no-repeat;
 	background-size: 160px 160px;
@@ -130,12 +134,18 @@ body {
 	width: 160px;
   
 	content: "";
-	opacity: 0.75;
+	opacity: 0;
 	bottom: 40px;
 	right: -5px;
 	position: absolute;
 	z-index: 0;
-	display: block;
+	display: none;
+    transition: all 1s ease-out;
+}
+
+#device-content.show::after {
+    opacity: 0.55;
+    display: block;
 }
 
 #device-content.android::after {

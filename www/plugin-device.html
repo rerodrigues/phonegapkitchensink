@@ -45,11 +45,10 @@
 				
 				element.innerHTML = info;
 				
-				var page = document.getElementById('device-content');
-				
-				var platformClass = page.className.split(' ');
-				platformClass.push(device.platform);
-				page.className = platformClass.join(' ');
+				var deviceContent = document.getElementById('device-content');
+				var platformClass = deviceContent.className.split(' ');
+                
+				deviceContent.className = platformClass.concat([device.platform, 'show']).join(' ');
 			}
 			
 			document.addEventListener("deviceready", onDeviceReady, true);
